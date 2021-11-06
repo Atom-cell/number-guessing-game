@@ -1,21 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import Main from "./components/Main";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  const [main, setMain] = React.useState(false);
+
+  if (main === false) {
+    return (
+      <View style={styles.container}>
+        <Text>Welcome to the Number Guessing Game!</Text>
+        <Pressable onPress={() => setMain(true)}>
+          <Text>START GAME</Text>
+        </Pressable>
+      </View>
+    );
+  } else if (main) {
+    return (
+      <View style={styles.container}>
+        <Main />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
