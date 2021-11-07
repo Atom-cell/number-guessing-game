@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 
-export default function Buttons({ showInput, guessCheck }) {
+export default function Buttons({ showInput, guessCheck, takeHint }) {
   return (
     <View style={styles.container}>
       <View style={styles.r1}>
@@ -44,7 +44,7 @@ export default function Buttons({ showInput, guessCheck }) {
         <Pressable onPress={() => showInput("0")} style={styles.btn}>
           <Text style={styles.txt}>0</Text>
         </Pressable>
-        <Pressable style={styles.btn}>
+        <Pressable style={styles.btn} onPress={() => takeHint()}>
           <Text style={styles.txt}>HINT</Text>
         </Pressable>
       </View>

@@ -9,12 +9,13 @@ import {
 } from "react-native";
 import Buttons from "./Buttons";
 import FinalScreen from "./FinalScreen";
-
+import ShowModal from "./Modal";
 export default function Main({ showMain }) {
-  const [top, setTop] = React.useState([0, 1, 5, 0]); //score, round, tries remaining, hints taken
-  let [number, setNumber] = React.useState("");
-  const [guess, setGuess] = React.useState(0);
-  const [done, setDone] = React.useState(false);
+  const [top, setTop] = React.useState([0, 1, 5, 0, "", 0]); //score, round, tries remaining, hints taken,modal message, correct guesses
+  let [number, setNumber] = React.useState(""); //input number
+  const [guess, setGuess] = React.useState(0); //guess number
+  const [done, setDone] = React.useState(false); //done btn
+  const [modal, setModal] = React.useState(false); //modal
 
   React.useEffect(() => {
     setGuess(Math.floor(Math.random() * 100));
@@ -31,17 +32,21 @@ export default function Main({ showMain }) {
   const guessCheck = () => {
     if (top[2] >= 1) {
       if (number == guess) {
-        // alert("correct guess");
         let a = [...top];
         a[0] = a[0] + 10;
         a[1] = a[1] + 1;
+        a[4] = "Correct Guess";
+        a[5] = a[5] + 1;
         setNumber("");
         setTop(a);
         changeGuessNumber();
+        setModal(true);
       } else {
         let a = [...top];
         a[2] = a[2] - 1;
+        a[4] = "Wrong Guess";
         setTop(a);
+        setModal(true);
       }
     }
   };
@@ -51,8 +56,22 @@ export default function Main({ showMain }) {
     setNumber((number) => a);
   };
 
-  const takeHint = () => {};
+  const takeHint = () => {
+    let a = [...top];
+    a[0] = a[0] - 2;
+    a[3] = a[3] + 1;
+    if (number > guess) {
+      a[4] = "Guess lower";
+    } else {
+      a[4] = "Guess Higher";
+    }
+    setTop(a);
+    setModal(true);
+  };
 
+  const hideModal = () => {
+    setModal(false);
+  };
   const playAgain = () => {
     setDone(false);
     setTop([0, 1, 5, 0]);
@@ -62,14 +81,17 @@ export default function Main({ showMain }) {
     return (
       <View style={styles.container}>
         <View style={{ marginVertical: 20 }}>
-          <Text style={{ fontSize: 27 }}>{guess}</Text>
+          {/* <Text style={{ fontSize: 27 }}>{guess}</Text> */}
           <Text style={{ fontSize: 27 }}>Score: {top[0]}</Text>
           <Text style={{ fontSize: 27 }}>Round Number: {top[1]} </Text>
           <Text style={{ fontSize: 27 }}>Number of tries: {top[2]} </Text>
         </View>
         <View style={styles.inputWrapper}>
           <Text style={{ fontSize: 34, marginRight: 70 }}>{number}</Text>
-          <TouchableOpacity onPress={() => deleteInput()}>
+          <TouchableOpacity
+            onPress={() => deleteInput()}
+            style={{ position: "absolute", right: 120 }}
+          >
             <Image
               source={require("../assets/ios-backspace-3-512.png")}
               style={{
@@ -79,10 +101,15 @@ export default function Main({ showMain }) {
             />
           </TouchableOpacity>
         </View>
-        <Buttons showInput={showInput} guessCheck={guessCheck} />
+        <Buttons
+          showInput={showInput}
+          guessCheck={guessCheck}
+          takeHint={takeHint}
+        />
         <Pressable style={{ marginBottom: -40 }} onPress={() => setDone(true)}>
           <Text style={styles.btn}>DONE</Text>
         </Pressable>
+        {modal ? <ShowModal hideModal={hideModal} msg={top[4]} /> : null}
       </View>
     );
   } else if (done === true) {
@@ -103,7 +130,7 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: "row",
     justifyContent: "space-around",
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     marginVertical: 10,
   },
   btn: {

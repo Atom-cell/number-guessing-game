@@ -7,6 +7,9 @@ const FinalScreen = ({ stats, showMain, playAgain }) => {
       <View style={styles.stats}>
         <View style={{ marginVertical: 20 }}>
           <Text style={{ fontSize: 27 }}>Score: {stats[0]}</Text>
+          <Text style={{ fontSize: 27 }}>
+            Total Correct Guesses: {stats[5]}
+          </Text>
           <Text style={{ fontSize: 27 }}>Rounds Played: {stats[1] - 1}</Text>
           <Text style={{ fontSize: 27 }}>Tries Remaining: {stats[2]}</Text>
           <Text style={{ fontSize: 27 }}>Hints taken: {stats[3]}</Text>
