@@ -1,39 +1,39 @@
 import React from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 
-export default function Buttons({ setGuessNumber, guessCheck }) {
+export default function Buttons({ showInput, guessCheck }) {
   return (
     <View style={styles.container}>
       <View style={styles.r1}>
-        <Pressable onPress={() => setGuessNumber("1")} style={styles.btn}>
+        <Pressable onPress={() => showInput("1")} style={styles.btn}>
           <Text style={styles.txt}>1</Text>
         </Pressable>
-        <Pressable onPress={() => setGuessNumber("2")} style={styles.btn}>
+        <Pressable onPress={() => showInput("2")} style={styles.btn}>
           <Text style={styles.txt}>2</Text>
         </Pressable>
-        <Pressable onPress={() => setGuessNumber("3")} style={styles.btn}>
+        <Pressable onPress={() => showInput("3")} style={styles.btn}>
           <Text style={styles.txt}>3</Text>
         </Pressable>
       </View>
       <View style={styles.r1}>
-        <Pressable onPress={() => setGuessNumber("4")} style={styles.btn}>
+        <Pressable onPress={() => showInput("4")} style={styles.btn}>
           <Text style={styles.txt}>4</Text>
         </Pressable>
-        <Pressable onPress={() => setGuessNumber("5")} style={styles.btn}>
+        <Pressable onPress={() => showInput("5")} style={styles.btn}>
           <Text style={styles.txt}>5</Text>
         </Pressable>
-        <Pressable onPress={() => setGuessNumber("6")} style={styles.btn}>
+        <Pressable onPress={() => showInput("6")} style={styles.btn}>
           <Text style={styles.txt}>6</Text>
         </Pressable>
       </View>
       <View style={styles.r1}>
-        <Pressable onPress={() => setGuessNumber("7")} style={styles.btn}>
+        <Pressable onPress={() => showInput("7")} style={styles.btn}>
           <Text style={styles.txt}>7</Text>
         </Pressable>
-        <Pressable onPress={() => setGuessNumber("8")} style={styles.btn}>
+        <Pressable onPress={() => showInput("8")} style={styles.btn}>
           <Text style={styles.txt}>8</Text>
         </Pressable>
-        <Pressable onPress={() => setGuessNumber("9")} style={styles.btn}>
+        <Pressable onPress={() => showInput("9")} style={styles.btn}>
           <Text style={styles.txt}>9</Text>
         </Pressable>
       </View>
@@ -41,7 +41,7 @@ export default function Buttons({ setGuessNumber, guessCheck }) {
         <Pressable onPress={() => guessCheck()} style={styles.btn}>
           <Text style={styles.txt}>GUESS</Text>
         </Pressable>
-        <Pressable onPress={() => setGuessNumber("0")} style={styles.btn}>
+        <Pressable onPress={() => showInput("0")} style={styles.btn}>
           <Text style={styles.txt}>0</Text>
         </Pressable>
         <Pressable style={styles.btn}>
