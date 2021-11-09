@@ -30,7 +30,7 @@ export default function Main({ showMain }) {
   };
 
   const guessCheck = () => {
-    if (top[2] >= 1) {
+    if (top[2] >= 1 && number !== "") {
       if (number == guess) {
         let a = [...top];
         a[0] = a[0] + 10;
@@ -44,6 +44,7 @@ export default function Main({ showMain }) {
       } else {
         let a = [...top];
         a[2] = a[2] - 1;
+        a[1] = a[1] + 1;
         a[4] = "Wrong Guess";
         setTop(a);
         setModal(true);
@@ -57,16 +58,18 @@ export default function Main({ showMain }) {
   };
 
   const takeHint = () => {
-    let a = [...top];
-    a[0] = a[0] - 2;
-    a[3] = a[3] + 1;
-    if (number > guess) {
-      a[4] = "Guess lower";
-    } else {
-      a[4] = "Guess Higher";
+    if (number !== "") {
+      let a = [...top];
+      a[0] = a[0] - 2;
+      a[3] = a[3] + 1;
+      if (number > guess) {
+        a[4] = "Guess lower";
+      } else {
+        a[4] = "Guess Higher";
+      }
+      setTop(a);
+      setModal(true);
     }
-    setTop(a);
-    setModal(true);
   };
 
   const hideModal = () => {
@@ -74,7 +77,7 @@ export default function Main({ showMain }) {
   };
   const playAgain = () => {
     setDone(false);
-    setTop([0, 1, 5, 0]);
+    setTop([0, 1, 5, 0, "", 0]);
     changeGuessNumber();
   };
   if (done === false) {
@@ -82,12 +85,16 @@ export default function Main({ showMain }) {
       <View style={styles.container}>
         <View style={{ marginVertical: 20 }}>
           {/* <Text style={{ fontSize: 27 }}>{guess}</Text> */}
-          <Text style={{ fontSize: 27 }}>Score: {top[0]}</Text>
-          <Text style={{ fontSize: 27 }}>Round Number: {top[1]} </Text>
-          <Text style={{ fontSize: 27 }}>Number of tries: {top[2]} </Text>
+          <Text style={styles.statsText}>Score: {top[0]}</Text>
+          <Text style={styles.statsText}>Round Number: {top[1]} </Text>
+          <Text style={styles.statsText}>Number of tries: {top[2]} </Text>
         </View>
         <View style={styles.inputWrapper}>
-          <Text style={{ fontSize: 34, marginRight: 70 }}>{number}</Text>
+          <Text
+            style={{ fontSize: 34, marginRight: 70, fontFamily: "monospace" }}
+          >
+            {number}
+          </Text>
           <TouchableOpacity
             onPress={() => deleteInput()}
             style={{ position: "absolute", right: 120 }}
@@ -135,9 +142,14 @@ const styles = StyleSheet.create({
   },
   btn: {
     fontSize: 24,
-    backgroundColor: "#F2583E",
+    backgroundColor: "#BB86FC",
     paddingVertical: 20,
     paddingHorizontal: 60,
     borderRadius: 50,
+    fontFamily: "monospace",
+  },
+  statsText: {
+    fontSize: 27,
+    fontFamily: "monospace",
   },
 });

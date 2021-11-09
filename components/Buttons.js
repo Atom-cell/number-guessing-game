@@ -71,11 +71,13 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 8,
     width: "29%",
-    backgroundColor: "#D5E1DD",
+    backgroundColor: "#03DAC5",
     borderRadius: 50,
+    // #D5E1DD
   },
   txt: {
     fontSize: 19,
     fontWeight: "bold",
+    fontFamily: "monospace",
   },
 });

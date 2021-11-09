@@ -13,7 +13,7 @@ export default function App() {
   if (main === false) {
     return (
       <View style={styles.container}>
-        <Text style={styles.txt}>Welcome to the Number Guessing Game!</Text>
+        <Text style={styles.txt}>Guess the Number!</Text>
         <Pressable onPress={() => setMain(true)} style={styles.btn}>
           <Text style={styles.txt}> START GAME</Text>
         </Pressable>
@@ -35,9 +35,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
   },
-  txt: { fontSize: 30, textAlign: "center" },
+  txt: {
+    fontSize: 30,
+    textAlign: "center",
+    fontFamily: "monospace",
+  },
   btn: {
-    backgroundColor: "#F2583E",
+    // #F2583E
+    backgroundColor: "#BB86FC",
     paddingVertical: 20,
     paddingHorizontal: 60,
     borderRadius: 50,
