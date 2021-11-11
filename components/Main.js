@@ -18,11 +18,22 @@ export default function Main({ showMain }) {
   const [modal, setModal] = React.useState(false); //modal
 
   React.useEffect(() => {
-    setGuess(Math.floor(Math.random() * 100));
+    setGuess(Math.floor(Math.random() * 50));
   }, []);
+  React.useEffect(() => {
+    if (top[2] == 0) {
+      let a = [...top];
+      a[1] = a[1] + 1;
+      a[2] = 5;
+      a[4] = `Correct guess was ${guess}`;
+      setModal(true);
+      setTop(a);
+      changeGuessNumber();
+    }
+  });
 
   const changeGuessNumber = () => {
-    setGuess(Math.floor(Math.random() * 100));
+    setGuess(Math.floor(Math.random() * 50));
   };
 
   const showInput = (n) => {
@@ -35,6 +46,7 @@ export default function Main({ showMain }) {
         let a = [...top];
         a[0] = a[0] + 10;
         a[1] = a[1] + 1;
+        a[2] = 5;
         a[4] = "Correct Guess";
         a[5] = a[5] + 1;
         setNumber("");
@@ -44,7 +56,7 @@ export default function Main({ showMain }) {
       } else {
         let a = [...top];
         a[2] = a[2] - 1;
-        a[1] = a[1] + 1;
+        // a[1] = a[1] + 1;
         a[4] = "Wrong Guess";
         setTop(a);
         setModal(true);
@@ -79,6 +91,7 @@ export default function Main({ showMain }) {
     setDone(false);
     setTop([0, 1, 5, 0, "", 0]);
     changeGuessNumber();
+    setNumber("");
   };
   if (done === false) {
     return (
@@ -91,13 +104,18 @@ export default function Main({ showMain }) {
         </View>
         <View style={styles.inputWrapper}>
           <Text
-            style={{ fontSize: 34, marginRight: 70, fontFamily: "monospace" }}
+            style={{
+              fontSize: 34,
+              marginRight: 70,
+              fontFamily: "monospace",
+              width: "50%",
+            }}
           >
             {number}
           </Text>
           <TouchableOpacity
             onPress={() => deleteInput()}
-            style={{ position: "absolute", right: 120 }}
+            style={{ position: "absolute", right: 65 }}
           >
             <Image
               source={require("../assets/ios-backspace-3-512.png")}
